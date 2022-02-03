@@ -16,5 +16,11 @@ pub async fn get_all(db: db::Db) -> Option<JsonValue> {
 
 #[get("/<id>")]
 pub async fn get(db: db::Db, id: i32) -> Option<JsonValue> {
-    None
+    match db::todo::get(&db, id).await {
+        Ok(todo) => Some(json!({
+            "status": 200,
+            "result": todo.to_json(),
+        })),
+        Err(_) => None,
+    }
 }
