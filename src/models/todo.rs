@@ -10,6 +10,12 @@ pub struct Todo {
     pub created_at: DateTime<Utc>,
 }
 
+pub struct NewTodo {
+    pub creator_name: String,
+    pub title: String,
+    pub description: String,
+}
+
 #[derive(Serialize)]
 pub struct TodoJson {
     pub id: i32,
