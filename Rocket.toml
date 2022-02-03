@@ -1,0 +1,2 @@
+[default.databases]
+postgres = { url = "postgres://jihoonsong:password@localhost/postgres" }
