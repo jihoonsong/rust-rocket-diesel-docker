@@ -47,3 +47,14 @@ pub async fn update(db: db::Db, id: i32, new_todo: Json<NewTodo>) -> Option<Json
         Err(_) => None,
     }
 }
+
+#[delete("/<id>")]
+pub async fn delete(db: db::Db, id: i32) -> Option<JsonValue> {
+    match db::todo::delete(&db, id).await {
+        Ok(todo) => Some(json!({
+            "status": 200,
+            "result": todo.to_json(),
+        })),
+        Err(_) => None,
+    }
+}

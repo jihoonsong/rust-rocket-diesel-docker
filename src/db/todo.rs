@@ -29,3 +29,8 @@ pub async fn update(db: &db::Db, id: i32, new_todo: NewTodo) -> QueryResult<Todo
     })
     .await
 }
+
+pub async fn delete(db: &db::Db, id: i32) -> QueryResult<Todo> {
+    db.run(move |db| diesel::delete(all_todos.find(id)).get_result(db))
+        .await
+}
