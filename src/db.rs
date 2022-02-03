@@ -1,3 +1,5 @@
+pub mod todo;
+
 use rocket::fairing::AdHoc;
 use rocket_sync_db_pools::{database, diesel};
 
