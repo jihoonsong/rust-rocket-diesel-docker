@@ -20,6 +20,7 @@ fn rocket() -> _ {
                 routes::todo::get,
                 routes::todo::create,
                 routes::todo::update,
+                routes::todo::delete,
             ],
         )
         .register(
