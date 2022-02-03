@@ -36,3 +36,14 @@ pub async fn create(db: db::Db, new_todo: Json<NewTodo>) -> Option<JsonValue> {
         Err(_) => None,
     }
 }
+
+#[put("/<id>", format = "json", data = "<new_todo>")]
+pub async fn update(db: db::Db, id: i32, new_todo: Json<NewTodo>) -> Option<JsonValue> {
+    match db::todo::update(&db, id, new_todo.into_inner()).await {
+        Ok(todo) => Some(json!({
+            "status": 200,
+            "result": todo.to_json(),
+        })),
+        Err(_) => None,
+    }
+}
