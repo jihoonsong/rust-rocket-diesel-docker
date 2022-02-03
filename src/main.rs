@@ -19,6 +19,7 @@ fn rocket() -> _ {
                 routes::todo::get_all,
                 routes::todo::get,
                 routes::todo::create,
+                routes::todo::update,
             ],
         )
         .register(
