@@ -1,2 +1,5 @@
 [default.databases]
-postgres = { url = "postgres://jihoonsong:password@localhost/postgres" }
+postgres = { url = "postgres://jihoonsong:password@db/postgres" }
+
+[global]
+address = "0.0.0.0"
