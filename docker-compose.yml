@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+
+  rocket:
+    build: .
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+        - rocket:/usr/src/app
+
+  db:
+    image: postgres:14.1
+    restart: always
+    environment:
+      - POSTGRES_USER=jihoonsong
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
+      - POSTGRES_DB_URL=0.0.0.0
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  rocket:
+  dbdata:
