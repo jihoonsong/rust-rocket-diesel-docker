@@ -1,5 +1,6 @@
 use chrono::{DateTime, Utc};
 
+#[derive(Queryable)]
 pub struct Todo {
     pub id: i32,
     pub creator_name: String,
