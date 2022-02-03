@@ -17,7 +17,11 @@ pub async fn get_all(db: db::Db) -> Option<JsonValue> {
 
 #[get("/?<order>")]
 pub async fn get_all_order_by(db: db::Db, order: &str) -> Option<JsonValue> {
-    None
+    match order.to_ascii_lowercase().as_str() {
+        "asc" => get_all_order_by_asc(&db).await,
+        "desc" => get_all_order_by_desc(&db).await,
+        _ => None,
+    }
 }
 
 #[get("/<id>")]
@@ -59,6 +63,26 @@ pub async fn delete(db: db::Db, id: i32) -> Option<JsonValue> {
         Ok(todo) => Some(json!({
             "status": 200,
             "result": todo.to_json(),
+        })),
+        Err(_) => None,
+    }
+}
+
+async fn get_all_order_by_asc(db: &db::Db) -> Option<JsonValue> {
+    match db::todo::get_all_order_by_asc(db).await {
+        Ok(todos) => Some(json!({
+            "status": 200,
+            "result": FigmentValue::serialize(todos).unwrap(),
+        })),
+        Err(_) => None,
+    }
+}
+
+async fn get_all_order_by_desc(db: &db::Db) -> Option<JsonValue> {
+    match db::todo::get_all_order_by_desc(db).await {
+        Ok(todos) => Some(json!({
+            "status": 200,
+            "result": FigmentValue::serialize(todos).unwrap(),
         })),
         Err(_) => None,
     }
