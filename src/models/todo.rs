@@ -12,7 +12,7 @@ pub struct Todo {
     pub created_at: DateTime<Utc>,
 }
 
-#[derive(Insertable, Deserialize)]
+#[derive(Insertable, AsChangeset, Deserialize)]
 #[table_name = "todos"]
 pub struct NewTodo {
     pub creator_name: String,
