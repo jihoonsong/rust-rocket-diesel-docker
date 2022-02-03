@@ -15,6 +15,11 @@ pub async fn get_all(db: db::Db) -> Option<JsonValue> {
     }
 }
 
+#[get("/?<order>")]
+pub async fn get_all_order_by(db: db::Db, order: &str) -> Option<JsonValue> {
+    None
+}
+
 #[get("/<id>")]
 pub async fn get(db: db::Db, id: i32) -> Option<JsonValue> {
     match db::todo::get(&db, id).await {
