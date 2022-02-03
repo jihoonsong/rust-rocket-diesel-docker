@@ -20,3 +20,12 @@ pub async fn create(db: &db::Db, new_todo: NewTodo) -> QueryResult<Todo> {
     })
     .await
 }
+
+pub async fn update(db: &db::Db, id: i32, new_todo: NewTodo) -> QueryResult<Todo> {
+    db.run(move |db| {
+        diesel::update(all_todos.find(id))
+            .set(&new_todo)
+            .get_result(db)
+    })
+    .await
+}
