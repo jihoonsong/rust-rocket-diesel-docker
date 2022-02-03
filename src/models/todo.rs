@@ -1,7 +1,7 @@
 use crate::schema::todo::todos;
 
 use chrono::{DateTime, Utc};
-use rocket::serde::Serialize;
+use rocket::serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Serialize)]
 pub struct Todo {
@@ -12,7 +12,7 @@ pub struct Todo {
     pub created_at: DateTime<Utc>,
 }
 
-#[derive(Insertable)]
+#[derive(Insertable, Deserialize)]
 #[table_name = "todos"]
 pub struct NewTodo {
     pub creator_name: String,
