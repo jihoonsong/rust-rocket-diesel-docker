@@ -17,6 +17,7 @@ fn rocket() -> _ {
             "/todos",
             routes![
                 routes::todo::get_all,
+                routes::todo::get_all_order_by,
                 routes::todo::get,
                 routes::todo::create,
                 routes::todo::update,
