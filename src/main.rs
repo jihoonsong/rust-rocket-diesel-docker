@@ -13,7 +13,7 @@ mod schema;
 fn rocket() -> _ {
     rocket::build()
         .attach(db::init())
-        .mount("/todos", routes![routes::todo::get_all])
+        .mount("/todos", routes![routes::todo::get_all, routes::todo::get])
         .register(
             "/",
             catchers![
