@@ -1,8 +1,15 @@
 use crate::db;
 
-use rocket::serde::json::Value as JsonValue;
+use rocket::figment::value::Value as FigmentValue;
+use rocket::serde::json::{json, Value as JsonValue};
 
 #[get("/")]
 pub async fn get_all(db: db::Db) -> Option<JsonValue> {
-    None
+    match db::todo::get_all(&db).await {
+        Ok(todos) => Some(json!({
+            "status": 200,
+            "result": FigmentValue::serialize(todos).unwrap(),
+        })),
+        Err(_) => None,
+    }
 }
